@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -23,6 +23,7 @@ function TabNavigator()
   return(
     <Tab.Navigator
     screenOptions={({ route }) => ({
+      tabBarStyle: { backgroundColor: '#3F729B' },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -37,7 +38,7 @@ function TabNavigator()
           // You can return any component that you like here!
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato',
+        tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'gray',
       })}
     >
@@ -52,12 +53,17 @@ const HomeScreen =({ navigation }) => {
     <View style={styles.container}>
       <TouchableOpacity 
             onPress={() =>{
-              navigation.navigate('Settings');
-            }
-             
+              navigation.navigate('Settings');}
               }
-
        style={styles.card}>
+       <ImageBackground
+            source={require("./assets/workouts.jpg")}
+            style={{
+              height: "100%",
+              width: "100%",
+              justifyContent: 'space-around'
+            } }
+          />
         </TouchableOpacity>
     </View>
   );
@@ -97,7 +103,6 @@ const styles = StyleSheet.create({
   card: {
     height: 150,
     width: '95%',
-    backgroundColor: '#f18484',
     marginBottom: 16,
     justifyContent: 'center', //Centered vertically
     alignItems: 'center', // Centered horizontally
