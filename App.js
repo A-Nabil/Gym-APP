@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View, TouchableOpacity,ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import {WorkOutsScreen} from './Screens/WorkoutScreen'
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
@@ -12,7 +14,7 @@ export default function App({ navigation }) {
     <NavigationContainer>
         <Stack.Navigator>
     <Stack.Screen name="Home" component={TabNavigator}  options={{ headerShown: false }}/>
-    <Stack.Screen name="Settings" component={SettingsScreen} />
+    <Stack.Screen name="Workouts" component={WorkOutsScreen} />
   </Stack.Navigator>
     </NavigationContainer>
   );
@@ -53,7 +55,7 @@ const HomeScreen =({ navigation }) => {
     <View style={styles.container}>
       <TouchableOpacity 
             onPress={() =>{
-              navigation.navigate('Settings');}
+              navigation.navigate('Workouts');}
               }
        style={styles.card}>
        <ImageBackground
@@ -73,14 +75,6 @@ function ProfileScreen() {
   return (
     <View >
       <Text>Profile</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View >
-      <Text>settings</Text>
     </View>
   );
 }
