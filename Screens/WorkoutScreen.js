@@ -1,60 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { View, ScrollView,StyleSheet, TouchableOpacity,ImageBackground} from 'react-native';
-import {getWorkoutsNames} from '../Database/WorkoutsData'
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+  Text,
+} from "react-native";
+import {
+  getImageUrl,
+  getWorkoutsFromApi,
+  getImage,
+} from "../Database/WorkoutsData";
 
-
-export function WorkOutsScreen()  {
-
+export function WorkOutsScreen() {
   const [workouts, setVal] = useState([]);
-
-
 
   useEffect(() => {
     const workoutsCall = async () => {
-      const  data  = await getWorkoutsNames();
+      const data = await getWorkoutsFromApi();
+
       setVal(data);
-    }
+    };
 
-   workoutsCall();
-
+    workoutsCall();
   }, []);
 
   return (
-      <View >
-              <ScrollView horizontal>
-   { 
-    workouts.map((workoutName, index) => 
-    <TouchableOpacity key={index}  style={styles.roundButton}>
-      <ImageBackground
-            source={require("../assets/workouts.jpg")}
-            style={{
-              height: "100%",
-              width: "100%",
-            } }
-            imageStyle={{ borderRadius: 100}}
-          >
-          </ImageBackground></TouchableOpacity>
-      
-      )}
-</ScrollView>
-      </View>
-    );
-  }
+    <View>
+      <ScrollView horizontal>
+        {workouts.map((workout, index) => {
+          return (
+            <TouchableOpacity key={index} style={styles.roundButton}>
+              <Text
+                style={{
+                  fontSize: 24,
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  color: "#f0f0f5",
+                  textShadowColor: "black",
+                  textShadowRadius: 10,
+                }}
+              >
+                {workout.name_en}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+    </View>
+  );
+}
 
-  // Styles
+// Styles
 const styles = StyleSheet.create({
-    screen: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    roundButton: {
-      margin: 10,
-      width: 80,
-      height: 80,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 100,
-      backgroundColor: 'gray',
-    },
-  });
+  screen: {
+    flex: 1,
+  },
+  roundButton: {
+    margin: 5,
+    width: 150,
+    height: 80,
+    textAlignVertical: "bottom",
+  },
+});
