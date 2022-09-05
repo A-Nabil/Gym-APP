@@ -13,7 +13,7 @@ import {
   getImage,
 } from "../Database/WorkoutsData";
 
-export function WorkOutsScreen() {
+export function MusclesScreen() {
   const [workouts, setVal] = useState([]);
 
   useEffect(() => {
