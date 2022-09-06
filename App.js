@@ -9,6 +9,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { MusclesScreen } from "./Screens/Muscles";
+import MuscleWorkoutScreen from "./Screens/MuscleWorkouts";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -25,6 +26,7 @@ export default function App({ navigation }) {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Workouts" component={MusclesScreen} />
+        <Stack.Screen name="MuscleWorkout" component={MuscleWorkoutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

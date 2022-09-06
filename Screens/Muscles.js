@@ -7,18 +7,14 @@ import {
   Text,
   StyleSheet,
 } from "react-native";
-import {
-  getImageUrl,
-  getWorkoutsFromApi,
-  getImage,
-} from "../Database/WorkoutsData";
+import { getMusclesFromApi, getImage } from "../Database/WorkoutsData";
 
-export function MusclesScreen() {
+export function MusclesScreen({ navigation }) {
   const [workouts, setVal] = useState([]);
 
   useEffect(() => {
     const workoutsCall = async () => {
-      const data = await getWorkoutsFromApi();
+      const data = await getMusclesFromApi();
 
       setVal(data);
     };
@@ -35,8 +31,10 @@ export function MusclesScreen() {
             numColumns={2}
             renderItem={({ item }) => (
               <TouchableWithoutFeedback
-                key={item.id}
-                onPress={() => showItemDetails("button" + item.id)}
+                key={item.Id}
+                onPress={() =>
+                  navigation.navigate("MuscleWorkout", { muscleId: item.Id })
+                }
               >
                 <View style={styles.listItem}>
                   <ImageBackground
