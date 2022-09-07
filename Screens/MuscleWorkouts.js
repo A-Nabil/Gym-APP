@@ -3,7 +3,7 @@ import {
   View,
   FlatList,
   TouchableWithoutFeedback,
-  ImageBackground,
+  Image,
   Text,
   StyleSheet,
 } from "react-native";
@@ -27,7 +27,7 @@ class MuscleWorkoutScreen extends React.Component {
      { this.state.data &&
         <FlatList
           data={this.state.data}
-          numColumns={2}
+          numColumns={1}
           renderItem={({ item }) => (
             <TouchableWithoutFeedback
               key={item.Id}
@@ -36,11 +36,12 @@ class MuscleWorkoutScreen extends React.Component {
               }
             >
               <View style={styles.listItem}>
-                <ImageBackground
-                  resizeMode="cover"
+                <Image
+                 style={styles.image}
+                  resizeMode="stretch"
                   source={{ uri: item.imageUrl }}>
-                  <Text style={styles.title}>{item.Name}</Text>
-                </ImageBackground>
+                </Image>
+                <Text style={styles.title}>{item.Name}</Text>
               </View>
             </TouchableWithoutFeedback>
           )}
@@ -65,30 +66,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   listItem: {
-    flex: 0.5,
+    flex: 1,
     margin: 5,
     backgroundColor: "#fff",
     marginBottom: 10,
     borderRadius: 4,
     height: 100,
+    flexDirection: "row"
   },
   image: {
     flex: 1,
-    alignSelf: "center",
-    justifyContent: "flex-end",
-  },
-  roundButton: {
-    margin: 5,
-    width: 150,
-    height: 80,
-    textAlignVertical: "bottom",
   },
   title: {
+    flex: 2,
     fontSize: 18,
     fontWeight: "bold",
-    color: "#f0f0f5",
-    textShadowColor: "black",
-    textShadowRadius: 4,
-    textAlignVertical: "center",
+    color: "black",
+    margin:5
   },
 });
