@@ -18,12 +18,13 @@ class MuscleWorkoutScreen extends React.Component {
 
   async componentDidMount() {
     this.workOuts = await getMuscleWorkoutsFromApi(this.muscleId);
-    this.setState({ data: json });
+    this.setState({ data: this.workOuts });
   }
 
   render() {
     return (
       <View>
+     { this.state.data &&
         <FlatList
           data={this.state.data}
           numColumns={2}
@@ -37,15 +38,14 @@ class MuscleWorkoutScreen extends React.Component {
               <View style={styles.listItem}>
                 <ImageBackground
                   resizeMode="cover"
-                  style={styles.image}
-                  source={{ uri: getImage(item.Name) }}
-                >
+                  source={{ uri: item.imageUrl }}>
                   <Text style={styles.title}>{item.Name}</Text>
                 </ImageBackground>
               </View>
             </TouchableWithoutFeedback>
           )}
         />
+        }
       </View>
     );
   }
