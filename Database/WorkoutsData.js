@@ -7,7 +7,7 @@ export async function getWorkoutsNames() {
 export const getImage = (name) => {
   return (
     "https://workoutsassets.blob.core.windows.net/images/" +
-    name.toLowerCase() +
+    name.toLowerCase().replace(/ /g,"_") +
     ".jpg"
   );
 };

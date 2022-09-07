@@ -41,10 +41,7 @@ class MuscleWorkoutScreen extends React.Component {
                   resizeMode="stretch"
                   source={{ uri: item.imageUrl }}>
                 </Image>
-                <View style={{flex:2}}>
                 <Text style={styles.title}>{item.Name}</Text>
-                <Text >{item.difficulty}</Text>
-                </View>
               </View>
             </TouchableWithoutFeedback>
           )}

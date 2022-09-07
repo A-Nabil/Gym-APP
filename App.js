@@ -45,6 +45,10 @@ function TabNavigator() {
           } else if (route.name === "Profile") {
             iconName = focused ? "user" : "user";
           }
+          else
+          {
+             iconName = focused ? "dumbbell" : "dumbbell";
+          }
 
           // You can return any component that you like here!
           return <Icon name={iconName} size={size} color={color} />;
@@ -53,8 +57,8 @@ function TabNavigator() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="HomeTab" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen title="Home" name="HomeTab" component={HomeScreen} options={{ headerTitle: "home", title:"Home"}} />
+      <Tab.Screen name="Muscles" component={MusclesScreen} />
     </Tab.Navigator>
   );
 }
