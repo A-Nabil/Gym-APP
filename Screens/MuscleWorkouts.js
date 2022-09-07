@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   FlatList,
@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { getMuscleWorkoutsFromApi } from "../Database/WorkoutsData";
+import  DifficultyLevel from "../Components/DifficultyLevel"
 
 class MuscleWorkoutScreen extends React.Component {
   constructor(props) {
@@ -43,8 +44,10 @@ class MuscleWorkoutScreen extends React.Component {
                 </Image>
                 <View style={{flex:2}}>
                 <Text style={styles.title}>{item.Name}</Text>
-                <Text >{item.difficulty}</Text>
+                <View style={{flex:1, width:'12%',height:'20%',alignSelf:"flex-end",padding:5}}>
+                <DifficultyLevel  level={item.difficulty}></DifficultyLevel>
                 </View>
+              </View>
               </View>
             </TouchableWithoutFeedback>
           )}
