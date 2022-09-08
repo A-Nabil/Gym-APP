@@ -33,7 +33,10 @@ export function MusclesScreen({ navigation }) {
               <TouchableWithoutFeedback
                 key={item.Id}
                 onPress={() =>
-                  navigation.navigate("MuscleWorkout", { muscleId: item.Id })
+                  navigation.navigate("MuscleWorkout", {
+                    muscleId: item.Id,
+                    muscleName: item.name_en,
+                  })
                 }
               >
                 <View style={styles.listItem}>

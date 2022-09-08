@@ -14,6 +14,10 @@ import DifficultyLevel from "../Components/DifficultyLevel";
 class MuscleWorkoutScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    props.navigation.setOptions({
+      headerTitle: props.route.params.muscleName + " workouts",
+    });
     this.muscleId = props.route.params.muscleId;
     this.navigation = props.navigation;
     this.state = { data: [] };
