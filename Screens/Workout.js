@@ -28,6 +28,7 @@ class WorkoutScreen extends React.Component {
             style={{
               margin: 10,
               alignContent: "center",
+              fontWeight: "bold",
             }}
           >
             {this.workOutData.BodyParts}
@@ -43,6 +44,7 @@ class WorkoutScreen extends React.Component {
             <Text
               style={{
                 flex: 4,
+                fontWeight: "bold",
               }}
             >
               {this.workOutData.Equipment}
@@ -58,6 +60,7 @@ class WorkoutScreen extends React.Component {
           <Text
             style={{
               margin: 10,
+              fontSize: 18,
             }}
           >
             {this.workOutData.steps}
