@@ -8,26 +8,22 @@ import {
   Image,
 } from "react-native";
 import DifficultyLevel from "../Components/DifficultyLevel";
+import ImageSwitcher from "../Components/ImageSwitcher";
 
 class WorkoutScreen extends React.Component {
   constructor(props) {
     super(props);
     this.workOutData = props.route.params.workOut;
     props.navigation.setOptions({ headerTitle: this.workOutData.Name });
+
+    this.images = props.route.params.workOut.gif.split(",");
   }
 
   render() {
     return (
       <SafeAreaView>
         <ScrollView>
-          <Image
-            style={{
-              height: 250,
-              margin: 10,
-            }}
-            resizeMode="contain"
-            source={{ uri: this.workOutData.imageUrl }}
-          ></Image>
+          <ImageSwitcher images={this.images}></ImageSwitcher>
           <Text
             style={{
               margin: 10,
