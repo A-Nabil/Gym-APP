@@ -1,87 +1,83 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
+  SafeAreaView,
+  ScrollView,
   View,
-  FlatList,
-  TouchableWithoutFeedback,
-  Image,
-  Text,
   StyleSheet,
+  Text,
+  Image,
 } from "react-native";
-import { getMuscleWorkoutsFromApi } from "../Database/WorkoutsData";
+import DifficultyLevel from "../Components/DifficultyLevel";
 
-class MuscleWorkoutScreen extends React.Component {
+class WorkoutScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.muscleId = props.route.params.muscleId;
-    this.state = { data: [] };
-  }
-
-  async componentDidMount() {
-    this.workOuts = await getMuscleWorkoutsFromApi(this.muscleId);
-    this.setState({ data: this.workOuts });
+    this.workOutData = props.route.params.workOut;
+    props.navigation.setOptions({ headerTitle: this.workOutData.Name });
   }
 
   render() {
     return (
-      <View>
-     { this.state.data &&
-        <FlatList
-          data={this.state.data}
-          numColumns={1}
-          renderItem={({ item }) => (
-            <TouchableWithoutFeedback
-              key={item.Id}
-              onPress={() =>
-                navigation.navigate("MuscleWorkout", { muscleId: item.Id })
-              }
+      <SafeAreaView>
+        <ScrollView>
+          <Image
+            style={{
+              height: 250,
+              margin: 10,
+            }}
+            resizeMode="contain"
+            source={{ uri: this.workOutData.imageUrl }}
+          ></Image>
+          <Text
+            style={{
+              margin: 10,
+              alignContent: "center",
+            }}
+          >
+            {this.workOutData.BodyParts}
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              margin: 10,
+              alignContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                flex: 4,
+              }}
             >
-              <View style={styles.listItem}>
-                <Image
-                 style={styles.image}
-                  resizeMode="stretch"
-                  source={{ uri: item.imageUrl }}>
-                </Image>
-                <Text style={styles.title}>{item.Name}</Text>
-              </View>
-            </TouchableWithoutFeedback>
-          )}
-        />
-        }
-      </View>
+              {this.workOutData.Equipment}
+            </Text>
+            <View style={{ width: 40, paddingRight: 10 }}>
+              <DifficultyLevel
+                level={this.workOutData.difficulty}
+              ></DifficultyLevel>
+            </View>
+          </View>
+          {/* <Text>{this.workOutData.gif}</Text> */}
+
+          <Text
+            style={{
+              margin: 10,
+            }}
+          >
+            {this.workOutData.steps}
+          </Text>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
 
-export default MuscleWorkoutScreen;
+export default WorkoutScreen;
 
 // Styles
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     flexGrow: 1,
-  },
-  list: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    justifyContent: "center",
-  },
-  listItem: {
-    flex: 1,
-    margin: 5,
-    backgroundColor: "#fff",
-    marginBottom: 10,
-    borderRadius: 4,
-    height: 100,
-    flexDirection: "row"
-  },
-  image: {
-    flex: 1,
-  },
-  title: {
-    flex: 2,
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "black",
-    margin:5
   },
 });

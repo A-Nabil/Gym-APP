@@ -10,6 +10,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { MusclesScreen } from "./Screens/Muscles";
 import MuscleWorkoutScreen from "./Screens/MuscleWorkouts";
+import WorkoutScreen from "./Screens/Workout";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -26,6 +27,7 @@ export default function App({ navigation }) {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Workouts" component={MusclesScreen} />
+        <Stack.Screen name="Workout" component={WorkoutScreen} />
         <Stack.Screen name="MuscleWorkout" component={MuscleWorkoutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -44,10 +46,8 @@ function TabNavigator() {
             iconName = focused ? "home" : "home";
           } else if (route.name === "Profile") {
             iconName = focused ? "user" : "user";
-          }
-          else
-          {
-             iconName = focused ? "dumbbell" : "dumbbell";
+          } else {
+            iconName = focused ? "dumbbell" : "dumbbell";
           }
 
           // You can return any component that you like here!
@@ -57,7 +57,12 @@ function TabNavigator() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen title="Home" name="HomeTab" component={HomeScreen} options={{ headerTitle: "home", title:"Home"}} />
+      <Tab.Screen
+        title="Home"
+        name="HomeTab"
+        component={HomeScreen}
+        options={{ headerTitle: "home", title: "Home" }}
+      />
       <Tab.Screen name="Muscles" component={MusclesScreen} />
     </Tab.Navigator>
   );
