@@ -7,7 +7,7 @@ export async function getWorkoutsNames() {
 export const getImage = (name) => {
   return (
     "https://workoutsassets.blob.core.windows.net/images/" +
-    name.toLowerCase().replace(/ /g,"_") +
+    name.toLowerCase().replace(/ /g, "_") +
     ".jpg"
   );
 };
@@ -31,9 +31,11 @@ export const getMusclesFromApi = () => {
 export const getMuscleWorkoutsFromApi = (muscleId) => {
   //'https://wger.de/api/v2/muscle'
   let apiUrl =
-    "http://gymapp-backend.azurewebsites.net/api/muscles/" +
-    muscleId +
-    "/workouts";
+    "https://gymapp-backend.azurewebsites.net/api/workouts?" +
+    new URLSearchParams({
+      muscleId: muscleId,
+      isGym: globalThis.isGym,
+    });
   return fetch(apiUrl)
     .then((response) => response.json())
     .then((json) => {

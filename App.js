@@ -8,7 +8,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { MusclesScreen } from "./Screens/Muscles";
+import { MusclesScreen, MuscleScreenHeader } from "./Screens/Muscles";
 import MuscleWorkoutScreen from "./Screens/MuscleWorkouts";
 import WorkoutScreen from "./Screens/Workout";
 
@@ -63,7 +63,13 @@ function TabNavigator() {
         component={HomeScreen}
         options={{ headerTitle: "home", title: "Home" }}
       />
-      <Tab.Screen name="Muscles" component={MusclesScreen} />
+      <Tab.Screen
+        name="Muscles"
+        component={MusclesScreen}
+        options={{
+          headerRight: () => <MuscleScreenHeader />,
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -90,18 +96,6 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-function ProfileScreen() {
-  return (
-    <View>
-      <Text>Profile</Text>
-    </View>
-  );
-}
-
-const TestScreen = ({ navigation, route }) => {
-  return <Text>This is {route.params.name}'s profile</Text>;
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -111,7 +105,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: "600",
-    color: "white",
   },
   card: {
     height: 150,

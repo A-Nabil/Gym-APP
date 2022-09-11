@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   Text,
-  Image,
+  FlatList,
+  Button,
 } from "react-native";
 import DifficultyLevel from "../Components/DifficultyLevel";
 import ImageSwitcher from "../Components/ImageSwitcher";
@@ -22,50 +23,64 @@ class WorkoutScreen extends React.Component {
   render() {
     return (
       <SafeAreaView>
-        <ScrollView>
-          <ImageSwitcher images={this.images}></ImageSwitcher>
-          <Text
-            style={{
-              margin: 10,
-              alignContent: "center",
-              fontWeight: "bold",
-            }}
-          >
-            {this.workOutData.BodyParts}
-          </Text>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              margin: 10,
-              alignContent: "center",
-            }}
-          >
+        <FlatList
+          ListHeaderComponent={
+            <View>
+              <ImageSwitcher images={this.images}></ImageSwitcher>
+              <Text
+                style={{
+                  margin: 10,
+                  alignContent: "center",
+                  fontWeight: "bold",
+                }}
+              >
+                {this.workOutData.BodyParts}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                }}
+              >
+                <Button style={{ margin: 5 }} title="Is gym"></Button>
+                <Button title="Is home"></Button>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  margin: 10,
+                  alignContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    flex: 4,
+                    fontWeight: "bold",
+                  }}
+                >
+                  {this.workOutData.Equipment}
+                </Text>
+                <View style={{ width: 40, paddingRight: 10 }}>
+                  <DifficultyLevel
+                    level={this.workOutData.difficulty}
+                  ></DifficultyLevel>
+                </View>
+              </View>
+            </View>
+          }
+          data={this.workOutData.steps.split(";")}
+          renderItem={({ item }) => (
             <Text
               style={{
-                flex: 4,
-                fontWeight: "bold",
+                margin: 10,
+                fontSize: 18,
+                backgroundColor: "lightgray",
               }}
             >
-              {this.workOutData.Equipment}
+              {item}
             </Text>
-            <View style={{ width: 40, paddingRight: 10 }}>
-              <DifficultyLevel
-                level={this.workOutData.difficulty}
-              ></DifficultyLevel>
-            </View>
-          </View>
-          {/* <Text>{this.workOutData.gif}</Text> */}
-
-          <Text
-            style={{
-              margin: 10,
-              fontSize: 18,
-            }}
-          >
-            {this.workOutData.steps}
-          </Text>
-        </ScrollView>
+          )}
+        ></FlatList>
       </SafeAreaView>
     );
   }

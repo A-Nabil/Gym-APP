@@ -6,6 +6,7 @@ import {
   ImageBackground,
   Text,
   StyleSheet,
+  TouchableOpacity,
 } from "react-native";
 import { getMusclesFromApi, getImage } from "../Database/WorkoutsData";
 
@@ -18,7 +19,6 @@ export function MusclesScreen({ navigation }) {
 
       setVal(data);
     };
-
     workoutsCall();
   }, []);
 
@@ -53,6 +53,41 @@ export function MusclesScreen({ navigation }) {
           />
         )}
       </View>
+    </View>
+  );
+}
+
+export function MuscleScreenHeader() {
+  [globalThis.isGym, setVal] = useState(true);
+
+  return (
+    <View style={{ flexDirection: "row", marginRight: 10 }}>
+      <TouchableOpacity
+        title="Home"
+        style={
+          globalThis.isGym
+            ? styles.headerInactiveButtons
+            : styles.headerActiveButtons
+        }
+        onPress={() => {
+          setVal(false);
+        }}
+      >
+        <Text>Home</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        title="Gym"
+        style={
+          globalThis.isGym
+            ? styles.headerActiveButtons
+            : styles.headerInactiveButtons
+        }
+        onPress={() => {
+          setVal(true);
+        }}
+      >
+        <Text>Gym</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -93,5 +128,17 @@ const styles = StyleSheet.create({
     textShadowColor: "black",
     textShadowRadius: 4,
     textAlignVertical: "center",
+  },
+  headerInactiveButtons: {
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
+    padding: 10,
+    marginStart: 5,
+  },
+  headerActiveButtons: {
+    alignItems: "center",
+    backgroundColor: "#3F729B",
+    padding: 10,
+    marginStart: 5,
   },
 });
